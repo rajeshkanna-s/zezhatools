@@ -15,8 +15,8 @@ import { ResumeData, defaultResumeData } from '@/types/resume';
 const Index = () => {
   const [resumeData, setResumeData] = useState<ResumeData>(defaultResumeData);
   const [isDownloading, setIsDownloading] = useState(false);
-  const formScrollRef = useRef<HTMLDivElement>(null);
-  const previewScrollRef = useRef<HTMLDivElement>(null);
+  const leftScrollRef = useRef<HTMLDivElement>(null);
+  const rightScrollRef = useRef<HTMLDivElement>(null);
 
   const updateResumeData = (section: keyof ResumeData, data: any) => {
     setResumeData(prev => ({
@@ -36,16 +36,13 @@ const Index = () => {
     }
   };
 
-  // Synchronized scrolling function
-  const handleFormScroll = () => {
-    if (formScrollRef.current && previewScrollRef.current) {
-      const formElement = formScrollRef.current;
-      const previewElement = previewScrollRef.current;
-      
-      const scrollPercentage = formElement.scrollTop / (formElement.scrollHeight - formElement.clientHeight);
-      const targetScrollTop = scrollPercentage * (previewElement.scrollHeight - previewElement.clientHeight);
-      
-      previewElement.scrollTop = targetScrollTop;
+  // Synchronized scrolling
+  const handleLeftScroll = () => {
+    if (leftScrollRef.current && rightScrollRef.current) {
+      const scrollRatio = leftScrollRef.current.scrollTop / 
+        (leftScrollRef.current.scrollHeight - leftScrollRef.current.clientHeight);
+      rightScrollRef.current.scrollTop = scrollRatio * 
+        (rightScrollRef.current.scrollHeight - rightScrollRef.current.clientHeight);
     }
   };
 
@@ -66,63 +63,64 @@ const Index = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 h-[calc(100vh-200px)]">
           {/* Form Panel */}
-          <ScrollArea 
-            className="h-full"
-            ref={formScrollRef}
-            onScrollCapture={handleFormScroll}
-          >
-            <div className="space-y-6 pr-4">
-              <Card className="p-6 shadow-xl border-0 bg-white/80 backdrop-blur-sm">
-                <PersonalInfoForm 
-                  data={resumeData.personal}
-                  onChange={(data) => updateResumeData('personal', data)}
-                />
-              </Card>
+          <div className="h-full">
+            <ScrollArea 
+              ref={leftScrollRef}
+              className="h-full pr-4"
+              onScroll={handleLeftScroll}
+            >
+              <div className="space-y-6">
+                <Card className="p-6 shadow-xl border-0 bg-white/80 backdrop-blur-sm">
+                  <PersonalInfoForm 
+                    data={resumeData.personal}
+                    onChange={(data) => updateResumeData('personal', data)}
+                  />
+                </Card>
 
-              <Card className="p-6 shadow-xl border-0 bg-white/80 backdrop-blur-sm">
-                <ExperienceForm
-                  data={resumeData.experience}
-                  onChange={(data) => updateResumeData('experience', data)}
-                />
-              </Card>
+                <Card className="p-6 shadow-xl border-0 bg-white/80 backdrop-blur-sm">
+                  <ExperienceForm
+                    data={resumeData.experience}
+                    onChange={(data) => updateResumeData('experience', data)}
+                  />
+                </Card>
 
-              <Card className="p-6 shadow-xl border-0 bg-white/80 backdrop-blur-sm">
-                <EducationForm
-                  data={resumeData.education}
-                  onChange={(data) => updateResumeData('education', data)}
-                />
-              </Card>
+                <Card className="p-6 shadow-xl border-0 bg-white/80 backdrop-blur-sm">
+                  <EducationForm
+                    data={resumeData.education}
+                    onChange={(data) => updateResumeData('education', data)}
+                  />
+                </Card>
 
-              <Card className="p-6 shadow-xl border-0 bg-white/80 backdrop-blur-sm">
-                <SkillsForm
-                  data={resumeData.skills}
-                  onChange={(data) => updateResumeData('skills', data)}
-                />
-              </Card>
+                <Card className="p-6 shadow-xl border-0 bg-white/80 backdrop-blur-sm">
+                  <SkillsForm
+                    data={resumeData.skills}
+                    onChange={(data) => updateResumeData('skills', data)}
+                  />
+                </Card>
 
-              <Card className="p-6 shadow-xl border-0 bg-white/80 backdrop-blur-sm">
-                <OptionalSectionsForm
-                  data={{
-                    summary: resumeData.summary,
-                    achievements: resumeData.achievements,
-                    languages: resumeData.languages,
-                    webPresence: resumeData.webPresence
-                  }}
-                  onChange={(section, data) => updateResumeData(section, data)}
-                />
-              </Card>
-            </div>
-          </ScrollArea>
+                <Card className="p-6 shadow-xl border-0 bg-white/80 backdrop-blur-sm">
+                  <OptionalSectionsForm
+                    data={{
+                      summary: resumeData.summary,
+                      achievements: resumeData.achievements,
+                      languages: resumeData.languages,
+                      webPresence: resumeData.webPresence
+                    }}
+                    onChange={(section, data) => updateResumeData(section, data)}
+                  />
+                </Card>
+              </div>
+            </ScrollArea>
+          </div>
 
           {/* Resume Preview */}
-          <ScrollArea 
-            className="h-full"
-            ref={previewScrollRef}
-          >
-            <Card className="shadow-2xl border-0 overflow-hidden">
-              <ResumePreview data={resumeData} />
-            </Card>
-          </ScrollArea>
+          <div className="h-full">
+            <ScrollArea ref={rightScrollRef} className="h-full">
+              <Card className="shadow-2xl border-0 overflow-hidden">
+                <ResumePreview data={resumeData} />
+              </Card>
+            </ScrollArea>
+          </div>
         </div>
 
         {/* Download Button */}
