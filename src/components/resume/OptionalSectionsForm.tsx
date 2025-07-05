@@ -15,7 +15,7 @@ interface OptionalSectionsFormProps {
     languages: Language[];
     webPresence: WebPresence[];
   };
-  onChange: (section: string, data: any) => void;
+  onChange: (section: 'summary' | 'achievements' | 'languages' | 'webPresence', data: any) => void;
 }
 
 export const OptionalSectionsForm = ({ data, onChange }: OptionalSectionsFormProps) => {
