@@ -8,10 +8,10 @@ interface ResumePreviewProps {
 
 export const ResumePreview = ({ data }: ResumePreviewProps) => {
   return (
-    <div id="resume-output" className="bg-white w-full max-w-4xl mx-auto p-8 font-serif text-sm leading-relaxed print:shadow-none">
+    <div id="resume-output" className="bg-white w-full max-w-4xl mx-auto p-8 text-sm leading-relaxed print:shadow-none" style={{ fontFamily: 'Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
       {/* Header */}
       <div className="text-center border-b-2 border-gray-300 pb-4 mb-6">
-        <h1 className="text-3xl font-bold text-gray-800 tracking-wide mb-2">
+        <h1 className="text-3xl font-bold text-gray-800 tracking-wide mb-2" style={{ fontFamily: 'Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
           {data.personal.fullName || "YOUR NAME"}
         </h1>
         <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-600">
@@ -48,13 +48,13 @@ export const ResumePreview = ({ data }: ResumePreviewProps) => {
           {/* Experience */}
           {data.experience.length > 0 && (
             <section>
-              <h2 className="text-lg font-bold text-blue-600 border-b border-blue-600 pb-1 mb-4">
+              <h2 className="text-lg font-bold text-blue-600 border-b border-blue-600 pb-1 mb-4" style={{ fontFamily: 'Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
                 EXPERIENCE
               </h2>
               <div className="space-y-4">
                 {data.experience.map((exp) => (
                   <div key={exp.id}>
-                    <div className="font-semibold text-gray-800">
+                    <div className="font-semibold text-gray-800" style={{ fontFamily: 'Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
                       {exp.company} | {exp.jobTitle}
                     </div>
                     <div className="flex gap-4 text-sm text-gray-600 mb-2">
@@ -69,7 +69,7 @@ export const ResumePreview = ({ data }: ResumePreviewProps) => {
                     </div>
                     <ul className="list-disc list-inside space-y-1 text-sm">
                       {exp.responsibilities.filter(resp => resp.trim()).map((resp, index) => (
-                        <li key={index} className="text-gray-700">{resp}</li>
+                        <li key={index} className="text-gray-700" style={{ fontFamily: 'Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>{resp}</li>
                       ))}
                     </ul>
                   </div>
@@ -81,13 +81,13 @@ export const ResumePreview = ({ data }: ResumePreviewProps) => {
           {/* Education */}
           {data.education.length > 0 && (
             <section>
-              <h2 className="text-lg font-bold text-blue-600 border-b border-blue-600 pb-1 mb-4">
+              <h2 className="text-lg font-bold text-blue-600 border-b border-blue-600 pb-1 mb-4" style={{ fontFamily: 'Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
                 EDUCATION
               </h2>
               <div className="space-y-3">
                 {data.education.map((edu) => (
                   <div key={edu.id}>
-                    <div className="font-semibold text-gray-800">
+                    <div className="font-semibold text-gray-800" style={{ fontFamily: 'Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
                       {edu.institution} | {edu.degree}
                     </div>
                     <div className="flex gap-4 text-sm text-gray-600">
@@ -110,14 +110,14 @@ export const ResumePreview = ({ data }: ResumePreviewProps) => {
           {/* Achievements */}
           {data.achievements.length > 0 && data.achievements.some(ach => ach.trim()) && (
             <section>
-              <h2 className="text-lg font-bold text-blue-600 border-b border-blue-600 pb-1 mb-4">
+              <h2 className="text-lg font-bold text-blue-600 border-b border-blue-600 pb-1 mb-4" style={{ fontFamily: 'Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
                 ACHIEVEMENTS
               </h2>
               <ul className="space-y-2 text-sm">
                 {data.achievements.filter(ach => ach.trim()).map((achievement, index) => (
                   <li key={index} className="flex items-start gap-2">
                     <span className="text-blue-600 mt-1">✓</span>
-                    <span className="text-gray-700">{achievement}</span>
+                    <span className="text-gray-700" style={{ fontFamily: 'Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>{achievement}</span>
                   </li>
                 ))}
               </ul>
@@ -130,10 +130,10 @@ export const ResumePreview = ({ data }: ResumePreviewProps) => {
           {/* Summary */}
           {data.summary && (
             <section>
-              <h2 className="text-lg font-bold text-blue-600 border-b border-blue-600 pb-1 mb-4">
+              <h2 className="text-lg font-bold text-blue-600 border-b border-blue-600 pb-1 mb-4" style={{ fontFamily: 'Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
                 SUMMARY
               </h2>
-              <p className="text-sm text-gray-700 leading-relaxed">
+              <p className="text-sm text-gray-700 leading-relaxed" style={{ fontFamily: 'Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
                 {data.summary}
               </p>
             </section>
@@ -142,7 +142,7 @@ export const ResumePreview = ({ data }: ResumePreviewProps) => {
           {/* Skills */}
           {data.skills.length > 0 && (
             <section>
-              <h2 className="text-lg font-bold text-blue-600 border-b border-blue-600 pb-1 mb-4">
+              <h2 className="text-lg font-bold text-blue-600 border-b border-blue-600 pb-1 mb-4" style={{ fontFamily: 'Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
                 SKILLS
               </h2>
               <div className="flex flex-wrap gap-2">
@@ -150,6 +150,7 @@ export const ResumePreview = ({ data }: ResumePreviewProps) => {
                   <span
                     key={index}
                     className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs"
+                    style={{ fontFamily: 'Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
                   >
                     {skill}
                   </span>
@@ -161,13 +162,13 @@ export const ResumePreview = ({ data }: ResumePreviewProps) => {
           {/* Languages */}
           {data.languages.length > 0 && (
             <section>
-              <h2 className="text-lg font-bold text-blue-600 border-b border-blue-600 pb-1 mb-4">
+              <h2 className="text-lg font-bold text-blue-600 border-b border-blue-600 pb-1 mb-4" style={{ fontFamily: 'Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
                 LANGUAGES
               </h2>
               <div className="space-y-2 text-sm">
                 {data.languages.map((language) => (
                   <div key={language.id}>
-                    <span className="font-medium text-gray-800">{language.name}</span>
+                    <span className="font-medium text-gray-800" style={{ fontFamily: 'Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>{language.name}</span>
                     <span className="text-gray-600 text-xs ml-2">({language.level})</span>
                   </div>
                 ))}
@@ -178,7 +179,7 @@ export const ResumePreview = ({ data }: ResumePreviewProps) => {
           {/* Web Presence */}
           {data.webPresence.length > 0 && (
             <section>
-              <h2 className="text-lg font-bold text-blue-600 border-b border-blue-600 pb-1 mb-4">
+              <h2 className="text-lg font-bold text-blue-600 border-b border-blue-600 pb-1 mb-4" style={{ fontFamily: 'Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
                 WEB PRESENCE
               </h2>
               <div className="space-y-2 text-sm">
@@ -190,6 +191,7 @@ export const ResumePreview = ({ data }: ResumePreviewProps) => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 hover:underline"
+                      style={{ fontFamily: 'Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
                     >
                       {item.name}
                     </a>
